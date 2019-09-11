@@ -1,0 +1,9 @@
+require('!file-loader?name=assets/guides/apama/introduction.html!../../../out/guides/apama/introduction.html');
+require('!file-loader?name=assets/guides/apama/actions.html!../../../out/guides/apama/actions.html');
+require('!file-loader?name=assets/guides/apama/advanced.html!../../../out/guides/apama/advanced.html');
+require('!file-loader?name=assets/guides/apama/best-practices.html!../../../out/guides/apama/best-practices.html');
+require('!file-loader?name=assets/guides/users-guide/administration.html!../../../out/guides/users-guide/administration.html');
+require('!file-loader?name=assets/guides/styles/docs-styles.css!../../../out/guides/styles/docs-styles.css');
+require('!file-loader?name=assets/guides/styles/main-content.css!../../styles/main-content.css');
+require('!file-loader?name=assets/images/users-guide/Administration/Admin_HomeScreen.png!../../../out/guides/images/users-guide/Administration/Admin_HomeScreen.png');
+require('!file-loader?name=assets/images/users-guide/userslist.png!../../../out/guides/images/users-guide/userslist.png');

@@ -1,0 +1,50 @@
+<div [class.head-open]="headerService.navigatorOpen$ | async">
+    <div class="app-main-header" [class.open]="headerService.navigatorOpen$ | async">
+        <div class="header-bar">
+            <button
+                    type="button"
+                    class="navigator-toggle main-header-button"
+                    title="Toggle navigator"
+                    (click)="headerService.toggleNavigator()"
+            >
+                <i c8yIcon="angle-double-right"></i>
+            </button>
+            <div class="app-view">
+                <span class="page-header">
+                <c8y-title-outlet></c8y-title-outlet>
+                <c8y-breadcrumb-outlet
+                        [breadcrumbs]="breadcrumbService.items$ | async"
+                        class="app-breadcrumbs"
+                ></c8y-breadcrumb-outlet>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <c8y-navigator-outlet [nodes]="navigator.items$ | async" [open]="headerService.navigatorOpen$ | async">
+        <header class="title navigator-slot-top">
+            <div class="tenant-brand"></div>
+            <span translate>Documentation</span>
+        </header>
+        <div
+                style="cursor:default"
+                class="powered-by navigator-slot-bottom"
+                placement="top">
+            <p translate>powered by Cumulocity</p>
+        </div>
+    </c8y-navigator-outlet>
+
+    <c8y-alert-outlet></c8y-alert-outlet>
+
+    <div class="mcontainer horizontal-tabs" [class.open]="headerService.navigatorOpen$ | async">
+        <div class="container-fluid c8y-docs">
+            <div class="row">
+                <div class="col-lg-max right-p-md left-p-md">
+
+                    <router-outlet></router-outlet>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

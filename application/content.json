@@ -1,0 +1,44 @@
+[
+  {
+    "path": "users-guide",
+    "data": {
+      "title": "User guide",
+      "priority": 60
+    },
+    "children": [
+      {
+        "path": "administration",
+        "data": {
+          "title": "Administration",
+          "filePath": "assets/guides/users-guide/administration.html",
+          "priority": 60
+        }
+      }
+    ]
+  },
+  {
+    "path": "apama",
+    "data": {
+      "title": "Analytics guide",
+      "priority": 20
+    },
+    "children": [
+      {
+        "path": "introduction",
+        "data": {
+          "title": "Overview",
+          "filePath": "assets/guides/apama/introduction.html",
+          "priority": 30
+        }
+      },
+      {
+        "path": "actions",
+        "data": {
+          "title": "Built-in actions",
+          "filePath": "assets/guides/apama/actions.html",
+          "priority": 20
+        }
+      }
+    ]
+  }
+]
