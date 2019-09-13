@@ -2,7 +2,6 @@ import { HOOK_NAVIGATOR_NODES, NavigatorNode } from '@c8y/ngx-components';
 
 // tslint:disable-next-line:no-var-requires
 const content = require('../../content.json');
-import './/import-files';
 const navigationNodes = content.map((root) => routeToNode(root));
 
 export const NAVIGATION_CONTENT = {

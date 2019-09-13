@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "collect": "node webpack/collect.js",
-    "start": "c8ycli server",
+    "start": "c8ycli server --env.extraWebpackConfig=./extra-webpack.config.js",
     "build": "c8ycli build",
     "deploy": "c8ycli deploy"
   },
@@ -29,8 +29,6 @@
     "core-js": "^2.6.2",
     "front-matter": "3.0.2",
     "fs-extra": "7.0.1",
-    "highlight.js": "9.15.6",
-    "html-loader": "0.5.5",
     "lodash-es": "^4.0.0",
     "rxjs": "~6.3.3",
     "web-animations-js": "^2.3.2",
@@ -40,9 +38,9 @@
     "@angular-devkit/build-angular": "~0.10.4",
     "@angular/compiler-cli": "7.2.2",
     "@angular/language-service": "7.2.2",
-    "typescript": "3.1.6",
     "@c8y/cli": "1005.0.0",
-    "copy-webpack-plugin": "5.0.4"
+    "copy-webpack-plugin": "^5.0.4",
+    "typescript": "3.1.6"
   },
   "c8y": {
     "application": {
@@ -50,12 +48,9 @@
       "contextPath": "documentation",
       "key": "documentation-application-key",
       "extraCssUrls": [
-        "assets/guides/styles/docs-styles.css",
-        "assets/guides/styles/main-content.css"
+        "assets/styles/docs-styles.css",
+        "assets/styles/main-content.css"
       ]
-    },
-    "cli": {
-      "extraWebpackConfig": "webpack/index.js"
     }
   }
 }
