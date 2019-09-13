@@ -9,15 +9,11 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
                 {
-                    from: '../../out/guides', to: 'assets'
-                },
-                {
-                    from: '../../out/guides', to: 'assets/guides'
+                    from: '../../public', to: 'guides'
                 },
                 {
                     from: '../styles', to: 'assets/styles'
                 },
-            ],
-            {copyUnmodified: true})
+            ])
     ]
 };

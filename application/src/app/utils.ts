@@ -1,17 +1,8 @@
-export function buildPath(page) {
-    const parts = [];
-    while (page) {
-        parts.push(page.path);
-        page = page.parent;
-    }
-    return parts.reverse().join('/');
-}
-
 export function getBreadcrumbs(page) {
     const breadcrumbs = [];
     while (page) {
         breadcrumbs.push({
-            path: buildPath(page),
+            path: page.path,
             label: page.data.title,
             icon: page.data.icon || 'folder'
         });

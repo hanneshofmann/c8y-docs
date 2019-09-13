@@ -17,7 +17,7 @@ function routeToNode(route, parent?) {
         label: data.title || route.path,
         priority: data.priority,
         icon: data.icon || 'no-icon',
-        path: (parent && parent.path ? parent.path + '/' : '') + route.path
+        path: route.path
     });
     if (route.children) {
         route.children

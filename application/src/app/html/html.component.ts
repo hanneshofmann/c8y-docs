@@ -29,17 +29,22 @@ export class HtmlComponent {
     }
 
     private removeTopNav(document) {
-        const elementsToRemove = document.getElementsByClassName('container-fluid topnav-container');
-        forEach(elementsToRemove, (el) => el.remove());
+        this.removeDomElements(document.getElementsByClassName('main-top-bar'));
+        this.removeDomElements(document.getElementsByClassName('main-nav navbar'));
+        this.removeDomElements(document.getElementsByClassName('cover'));
         return document;
+    }
+
+    private removeDomElements(elementsToRemove) {
+        forEach(elementsToRemove, (el) => el.remove());
     }
 
     private updateAbsoluteUrls(document) {
         const linkElements = document.getElementsByTagName('a');
         const imgElements = document.getElementsByTagName('img');
 
-        this.replaceLinks(linkElements, 'href', '/guides',  '#');
-        this.replaceLinks(imgElements, 'src', '/guides/',  'assets/');
+        this.replaceLinks(linkElements, 'href', '/guides',  '#/guides');
+        this.replaceLinks(imgElements, 'src', '/guides/',  'guides/');
         return document;
     }
 

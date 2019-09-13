@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavigatorService, HeaderService, NavigatorNode, BreadcrumbService} from '@c8y/ngx-components';
 import {Router} from '@angular/router';
-import {buildPath, getBreadcrumbs, getTopTitle} from './utils';
+import {getBreadcrumbs, getTopTitle} from './utils';
 import {HtmlComponent} from './html/html.component';
 import {get, assign} from 'lodash-es';
 
@@ -40,11 +40,11 @@ export class AppComponent {
             }
             if (page.parent) {
                 routes.push({
-                    path: buildPath(page),
+                    path: page.path || '',
                     data: {
                         breadcrumbs: getBreadcrumbs(page),
                         topTitle: getTopTitle(page),
-                        htmlUrl: get(page, 'data.filePath')
+                        htmlUrl: page.path + '/index.html'
                     },
                     component: HtmlComponent
                 });
