@@ -1,17 +1,22 @@
-import { HOOK_NAVIGATOR_NODES, NavigatorNode } from '@c8y/ngx-components';
-
-// tslint:disable-next-line:no-var-requires
-const content = require('../../content.json');
-const navigationNodes = content.map((root) => routeToNode(root));
+import {HOOK_NAVIGATOR_NODES, NavigatorNode} from '@c8y/ngx-components';
+import {getAppStructure} from "./utils";
 
 export const NAVIGATION_CONTENT = {
     provide: HOOK_NAVIGATOR_NODES,
     multi: true,
-    useValue: { get() { return navigationNodes; } }
+    useValue: {
+        async get() {
+            return await getNavigationNodes();
+        }
+    }
 };
 
+async function getNavigationNodes() {
+    return (await getAppStructure()).map((root) => routeToNode(root));
+}
+
 function routeToNode(route, parent?) {
-    const { data } = route;
+    const {data} = route;
 
     const node = new NavigatorNode({
         label: data.title || route.path,

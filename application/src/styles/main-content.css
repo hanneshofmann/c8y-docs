@@ -8,10 +8,9 @@
   z-index: 30;
 }
 
-  .main-content {
-    margin: 0 !important;
-    max-width: 1140px;
-  }
+.main-content {
+  margin: 0 !important;
+}
 
 
 html.loading, body.loading{

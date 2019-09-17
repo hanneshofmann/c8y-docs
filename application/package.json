@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "collect": "node webpack/collect.js",
-    "start": "c8ycli server --env.extraWebpackConfig=./extra-webpack.config.js",
+    "collect": "node webpack/collect-app-structure.js",
+    "start": "c8ycli server --env.extraWebpackConfig=./webpack/extra-webpack.config.js",
     "build": "c8ycli build",
     "deploy": "c8ycli deploy"
   },

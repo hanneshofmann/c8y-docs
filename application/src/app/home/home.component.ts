@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AppStateService } from "@c8y/ngx-components";
+import {Component} from '@angular/core';
+import {AppStateService} from "@c8y/ngx-components";
 
 @Component({
     selector: 'home',
@@ -9,5 +9,8 @@ import { AppStateService } from "@c8y/ngx-components";
 export class HomeComponent {
     constructor(
         public state: AppStateService
-    ) {}
+    ) {
+    }
+
+
 }
