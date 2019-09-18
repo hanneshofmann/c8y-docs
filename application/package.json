@@ -48,7 +48,7 @@
       "contextPath": "documentation",
       "key": "documentation-application-key",
       "extraCssUrls": [
-        "guides/style.css",
+        "style.css",
         "assets/styles/main-content.css"
       ]
     }

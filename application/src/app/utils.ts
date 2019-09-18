@@ -1,11 +1,3 @@
-export const pathToContent = 'assets/content.json';
-
-export async function getAppStructure() {
-    const content = (await fetch(pathToContent)
-        .then((res) => res.text()));
-    return JSON.parse(content);
-}
-
 export function getBreadcrumbs(page) {
     const breadcrumbs = [];
     while (page) {

@@ -25,6 +25,10 @@ export class HtmlComponent {
 
         const parser = new DOMParser();
         const htmlDocument = parser.parseFromString(html, "text/html");
+        const searchEl = htmlDocument.getElementById('filter-devices');
+        if (searchEl) {
+            searchEl.remove();
+        }
         const pageContent = this.updateAbsoluteUrls(htmlDocument).getElementsByClassName('main-content');
         this.renderer.appendChild(this.elementRef.nativeElement, pageContent[0]);
     }
@@ -33,8 +37,8 @@ export class HtmlComponent {
         const linkElements = document.getElementsByTagName('a');
         const imgElements = document.getElementsByTagName('img');
 
-        this.replaceLinks(linkElements, 'href', '/guides', '#/guides');
-        this.replaceLinks(imgElements, 'src', '/guides', 'guides');
+        this.replaceLinks(linkElements, 'href', '/guides', '#/');
+        this.replaceLinks(imgElements, 'src', '/guides/', '');
         return document;
     }
 

@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {NavigatorService, HeaderService, NavigatorNode, BreadcrumbService} from '@c8y/ngx-components';
+import {NavigatorService, HeaderService, NavigatorNode, BreadcrumbService, AppStateService} from '@c8y/ngx-components';
 import {Router} from '@angular/router';
-import {getAppStructure, getBreadcrumbs, getTopTitle} from './utils';
+import {getBreadcrumbs, getTopTitle} from './utils';
 import {HtmlComponent} from './html/html.component';
 import {get, assign} from 'lodash-es';
+import {AppStructureProvider} from "./structure/app-structure.provider";
 
 @Component({
     selector: 'c8y-bootstrap',
@@ -12,15 +13,19 @@ import {get, assign} from 'lodash-es';
 
 export class AppComponent {
     constructor(
+        private ui: AppStateService,
         private navigator: NavigatorService,
         private headerService: HeaderService,
         private breadcrumbService: BreadcrumbService,
-        private router: Router
+        private router: Router,
+        private appStructureProvider: AppStructureProvider
     ) {
         headerService.toggleNavigator();
-
         addHomeNode();
-        addAppRoutes();
+
+        const content = this.appStructureProvider.getAppStructure();
+        const routes = content.reduce(reduceRoutes, []);
+        resetConfig(routes);
 
         function addHomeNode() {
             navigator.add(new NavigatorNode({
@@ -29,12 +34,6 @@ export class AppComponent {
                 icon: 'home',
                 priority: 100
             }));
-        }
-
-        async function addAppRoutes() {
-            const content = await getAppStructure();
-            const routes = content.reduce(reduceRoutes, []);
-            resetConfig(routes);
         }
 
         function reduceRoutes(routes, page) {

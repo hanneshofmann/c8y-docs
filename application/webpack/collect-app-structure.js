@@ -44,16 +44,25 @@ async function collectChildren(directory) {
 
 async function readFiles(files) {
     return (await Promise.all(files.map(file => fs.readFile(file, {encoding: 'utf8'}))))
-        .map((c) => ({...(frontMatterParse(c).attributes)}));
+        .map((c, ix) => ({ ...(frontMatterParse(c).attributes), filePath: path.relative(pathToContent, files[ix]) }));
 }
 
 function frontMatterToRoute(fm) {
+    let filePath = '';
+    if(fm.slug) {
+        const splitFilePath = fm.filePath.split('/');
+        splitFilePath.pop();
+        filePath = splitFilePath.join('/') + '/' + fm.slug;
+    } else {
+        filePath = fm.filePath.replace(/.md$/, '');
+    }
     return {
-        path: fm.bundle || fm.collection,
+        path: fm.bundle || filePath,
         data: {
             title: fm.title || '',
             icon: fm.icon || 'no-icon',
-            priority: -fm.weight + 100
+            priority: -fm.weight + 100,
+            filePath: fm.filePath
         }
     };
 }

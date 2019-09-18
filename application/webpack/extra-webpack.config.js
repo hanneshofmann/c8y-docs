@@ -8,15 +8,15 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-                {
-                    from: '../../../public', to: 'guides'
-                },
-                {
-                    from: '../../src/styles', to: 'assets/styles'
-                },
-                {
-                    from: '../../content.json', to: 'assets'
-                }
-            ])
+            {
+                from: '../../../public', to: './'
+            },
+            {
+                from: '../../src/styles', to: 'assets/styles'
+            },
+            {
+                from: '../../content.json', to: 'assets'
+            }
+        ])
     ]
 };
