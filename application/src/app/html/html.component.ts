@@ -20,31 +20,33 @@ export class HtmlComponent {
     }
 
     async ngOnInit() {
-        const html = (await fetch(this.route.snapshot.data.htmlUrl)
+        const html: string = (await fetch(this.route.snapshot.data.htmlUrl)
             .then((res) => res.text()));
 
-        const parser = new DOMParser();
-        const htmlDocument = parser.parseFromString(html, "text/html");
-        const searchEl = htmlDocument.getElementById('filter-devices');
+        const parser: DOMParser = new DOMParser();
+        const htmlDocument: Document = parser.parseFromString(html, "text/html");
+        const searchEl: HTMLElement = htmlDocument.getElementById('filter-devices');
         if (searchEl) {
             searchEl.remove();
         }
-        const pageContent = this.updateAbsoluteUrls(htmlDocument).getElementsByClassName('main-content');
+        const pageContent: HTMLCollectionOf<Element> = this.updateAbsoluteUrls(htmlDocument).getElementsByClassName('main-content');
         this.renderer.appendChild(this.elementRef.nativeElement, pageContent[0]);
     }
 
-    private updateAbsoluteUrls(document) {
-        const linkElements = document.getElementsByTagName('a');
-        const imgElements = document.getElementsByTagName('img');
+    private updateAbsoluteUrls(document: Document): Document {
+        // @ts-ignore
+        const linkElements: HTMLCollectionOf<Element> = document.getElementsByTagName('a');
+        // @ts-ignore
+        const imgElements: HTMLCollectionOf<Element> = document.getElementsByTagName('img');
 
         this.replaceLinks(linkElements, 'href', '/guides', '#/');
         this.replaceLinks(imgElements, 'src', '/guides/', '');
         return document;
     }
 
-    private replaceLinks(elements, attribute, oldVal, newVal) {
+    private replaceLinks(elements: HTMLCollectionOf<Element>, attribute: string, oldVal: string, newVal: string): void {
         forEach(elements, (el) => {
-            const link = (el.getAttribute(attribute));
+            const link: string = el.getAttribute(attribute);
             if (startsWith(link, oldVal)) {
                 el.setAttribute(attribute, replace(link, oldVal, newVal));
             }

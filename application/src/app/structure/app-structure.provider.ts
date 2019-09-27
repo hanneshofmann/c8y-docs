@@ -1,23 +1,22 @@
 import {Injectable} from '@angular/core';
+import {RouteElement} from '../route-element';
 
 export const pathToContent = 'assets/content.json';
 
 @Injectable()
 export class AppStructureProvider {
 
-    private appStructure: Array<Object> = null;
+    private appStructure: Array<RouteElement> = null;
 
     constructor() {
 
     }
 
-    public getAppStructure(): Array<Object> {
+    public getAppStructure(): Array<RouteElement> {
         return this.appStructure;
     }
 
     async load() {
-        const content = (await fetch(pathToContent)
-            .then((res) => res.text()));
-        this.appStructure = JSON.parse(content);
+        this.appStructure = await (await fetch(pathToContent)).json();
     }
 }

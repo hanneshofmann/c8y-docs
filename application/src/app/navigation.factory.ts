@@ -3,6 +3,7 @@ import {AppStructureProvider} from './structure/app-structure.provider';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {remove, includes} from 'lodash-es';
+import {RouteElement} from "./route-element";
 
 
 @Injectable()
@@ -12,27 +13,30 @@ export class HookNavigatorNodesFactory implements NavigatorNodeFactory {
                 private appStructureProvider: AppStructureProvider) {
     }
 
-    get() {
-        return this.getNavigationNodes();
+    navigation = this.getNavigationNodes();
+
+    get(): Array<NavigatorNode> {
+        return this.navigation;
     }
 
-    getNavigationNodes() {
-        const appStructure = this.appStructureProvider.getAppStructure();
+    getNavigationNodes(): Array<NavigatorNode> {
+        const appStructure: Array<RouteElement> = this.appStructureProvider.getAppStructure();
         remove(appStructure, (el) => {
             return includes('release-notes', el.path);
         });
         return appStructure.map((root) => this.routeToNode(root));
     }
 
-    routeToNode(route, parent?) {
+    routeToNode(route: RouteElement, parent?: NavigatorNode): NavigatorNode  {
         const {data} = route;
 
-        const node = new NavigatorNode({
+        const node: NavigatorNode = new NavigatorNode({
             label: data.title || route.path,
             priority: data.priority,
             icon: data.icon || 'no-icon',
             path: route.path
         });
+
         if (route.children) {
             route.children
                 .forEach((r) => node.add(this.routeToNode(r, node)));
@@ -40,6 +44,7 @@ export class HookNavigatorNodesFactory implements NavigatorNodeFactory {
         if (!parent) {
             node.path = undefined;
         }
+
         return node;
     }
 }

@@ -7,9 +7,7 @@ import {AppStateService} from "@c8y/ngx-components";
 })
 
 export class HomeComponent {
-    constructor(
-        public state: AppStateService
-    ) {
+    constructor() {
     }
 
 

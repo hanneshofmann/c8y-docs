@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {NavigatorService, HeaderService, NavigatorNode, BreadcrumbService, AppStateService} from '@c8y/ngx-components';
-import {Router} from '@angular/router';
+import {Router, Routes} from '@angular/router';
 import {getBreadcrumbs, getTopTitle} from './utils';
 import {HtmlComponent} from './html/html.component';
-import {get, assign} from 'lodash-es';
 import {AppStructureProvider} from "./structure/app-structure.provider";
+import {RouteElement} from "./route-element";
 
 @Component({
     selector: 'c8y-bootstrap',
@@ -21,22 +21,18 @@ export class AppComponent {
         private appStructureProvider: AppStructureProvider
     ) {
         headerService.toggleNavigator();
-        addHomeNode();
+        navigator.add(new NavigatorNode({
+            label: 'Home',
+            path: '',
+            icon: 'home',
+            priority: 100
+        }));
 
-        const content = this.appStructureProvider.getAppStructure();
-        const routes = content.reduce(reduceRoutes, []);
+        const content: Array<RouteElement> = this.appStructureProvider.getAppStructure();
+        const routes: Routes = content.reduce(reduceRoutes, []);
         resetConfig(routes);
 
-        function addHomeNode() {
-            navigator.add(new NavigatorNode({
-                label: 'Home',
-                path: '',
-                icon: 'home',
-                priority: 100
-            }));
-        }
-
-        function reduceRoutes(routes, page) {
+        function reduceRoutes(routes: Routes, page: RouteElement): Routes {
             if (page.children) {
                 page.children.forEach((p) => {
                     p.parent = page;
@@ -59,7 +55,7 @@ export class AppComponent {
             return routes;
         }
 
-        function resetConfig(newRoutesConfig): void {
+        function resetConfig(newRoutesConfig: Routes): void {
             const existingRoutes = router.config;
             router.resetConfig(existingRoutes.concat(newRoutesConfig));
         }

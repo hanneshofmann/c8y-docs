@@ -11,19 +11,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppStructureProvider} from './structure/app-structure.provider';
 import {AppStructureFactory} from "./structure/app-structure.factory";
 
-
-const routes = [
-    {
-        path: '',
-        component: HomeComponent
-    }
-];
-
 @NgModule({
     declarations: [AppComponent, HomeComponent, HtmlComponent],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(routes, {enableTracing: false, useHash: true}),
+        RouterModule.forRoot(
+            [{path: '', component: HomeComponent}],
+            {enableTracing: false, useHash: true}),
         CoreModule.forRoot(),
         NgCommonModule,
         CoreModule,

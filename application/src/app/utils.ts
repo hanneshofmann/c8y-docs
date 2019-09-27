@@ -1,14 +1,16 @@
 export function getBreadcrumbs(page) {
     const breadcrumbs = [];
-    while (page) {
-        breadcrumbs.push({
-            path: page.path,
-            label: page.data.title,
-            icon: page.data.icon || 'folder'
+    let breadcrumbPage = page;
+
+    while (breadcrumbPage) {
+        breadcrumbs.unshift({
+            path: breadcrumbPage.path,
+            label: breadcrumbPage.data.title,
+            icon: breadcrumbPage.data.icon || 'folder'
         });
-        page = page.parent;
+        breadcrumbPage = breadcrumbPage.parent
     }
-    return breadcrumbs.reverse();
+    return breadcrumbs;
 }
 
 export function getTopTitle(page) {
