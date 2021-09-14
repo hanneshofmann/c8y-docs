@@ -500,13 +500,13 @@ For more details on the TrendMiner/DataHub interaction see also [Integrating Dat
 
 #### Accessing device metadata for offloading data
 
-Many use cases require more details on the device associated with an alarm, an event, or a measurement. For that reason DataHub provides views that join the inventory collection with the alarms, events, measurements collection.
+Many use cases require more details on the device associated with an alarm, an event, or a measurement. For that reason DataHub provides views that join the inventory collection with the alarms, events, measurements collection. The join views are not created for measurements offloadings based on the TrendMiner target table layout.
 
-Each time a new alarms, events, measurements, or inventory target table is created as part of an offloading pipeline and the first elements are offloaded, DataHub creates new views. If it is an inventory target table, it is joined with all existing alarms, events, measurements target tables. If it is an alarms, events, or measurements target table, it is joined with all existing inventory target tables. For each join, the **inventory_latest** view is used with **id** as join column. The views are organized as follows:
+Each time a new alarms, events, measurements, or inventory target table is created as part of an offloading pipeline and the first elements are offloaded, DataHub creates new views. If it is an inventory target table, it is joined with all existing alarms, events, measurements target tables. If it is an alarms, events, or measurements target table, it is joined with all existing inventory target tables. The **inventory_latest** and the **inventory_latest** views are used with **id** as join column, resulting in two views for each combination of inventory and alarms, events, measurements target table. The views are organized as follows:
 
 - A folder **join** in your data space contains all join views.
-- Within that folder each inventory target table has a corresponding subfolder. The name of the target table defines the name of the subfolder.
-- Under the subfolder of an inventory target table all join views are listed. These join views comprise all combinations of this inventory target table with the alarms, event, or measurements target tables. The name of the view combines the name of the inventory target table and the corresponding other target table.
+- Within that folder each inventory target table has a corresponding subfolder. The name of the inventory target table defines the name of the subfolder.
+- Under the subfolder of an inventory target table all join views are listed. These join views comprise all combinations of the *_all* and *_latest* inventory views with the alarms, event, or measurements target tables. The name of the view combines the name of the alarms, events, measurements target table with the suffix *_all* or *_latest*.
 
 For example, if you have two inventory target tables **inventory_1** and **inventory_2**, an alarms target table **alarms_1**, and an events target table **events_1**, the folder structure will be:
 
@@ -514,10 +514,16 @@ For example, if you have two inventory target tables **inventory_1** and **inven
 joins
 |
 └───inventory_1
-│   │   inventory_1_alarms_1
-│   │   inventory_1_events_1
+│   │   alarms_1_latest
+|   |   alarms_1_all
+│   │   events_1_latest
+|   |   events_1_all
 │   
 └───inventory_2
-│   │   inventory_2_alarms_1
-│   │   inventory_2_events_1
+│   │   alarms_1_latest
+|   |   alarms_1_all
+│   │   events_1_latest
+|   |   events_1_all
 ```
+
+>**Info:** If the *_all* or *_latest* inventory views are deleted, the join views will not work anymore.
