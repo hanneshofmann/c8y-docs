@@ -11,7 +11,9 @@ A {{< product-c8y-iot >}} web application can be a
 * a user interface application built on any web framework of your choice
 * a user interface application built using the {{< product-c8y-iot >}} user interface framework as a set of user interface plugins.
 
-All subscribed web applications of a tenant appear in the application switcher on the top right of the{{< product-c8y-iot >}} UI, so that users can navigate between the applications. They are hosted by {{< product-c8y-iot >}} and the application will be made available through a URL &lt;tenant&gt;.{{< domain-c8y >}}/apps/&lt;application&gt;.
+All subscribed web applications of a tenant appear in the application switcher on the top right of the {{< product-c8y-iot >}} UI, so that users can navigate between the applications. They are hosted by {{< product-c8y-iot >}} and the application will be made available through a URL of the form
+
+ &lt;tenant&gt;.{{< domain-c8y >}}/apps/&lt;application&gt;
 
 <img src="/images/users-guide/Administration/admin-app-switcher.png" alt="App switcher">
 
