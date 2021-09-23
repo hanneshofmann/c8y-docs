@@ -502,7 +502,9 @@ For more details on the TrendMiner/DataHub interaction see also [Integrating Dat
 
 Many use cases require more details on the device associated with an alarm, an event, or a measurement. For that reason DataHub provides views that join the inventory collection with the alarms, events, measurements collection. The join views are not created for measurements offloadings based on the TrendMiner target table layout.
 
-Each time a new alarms, events, measurements, or inventory target table is created as part of an offloading pipeline and the first elements are offloaded, DataHub creates new views. If it is an inventory target table, it is joined with all existing alarms, events, measurements target tables. If it is an alarms, events, or measurements target table, it is joined with all existing inventory target tables. The **inventory_latest** and the **inventory_latest** views are used with **id** as join column, resulting in two views for each combination of inventory and alarms, events, measurements target table. The views are organized as follows:
+Each time a new alarms, events, measurements, or inventory target table is created as part of an offloading pipeline and the first elements are offloaded, DataHub creates new views. If it is an inventory target table, which is newly created, it is joined with all existing alarms, events, measurements target tables. If it is an alarms, events, or measurements target table, which is newly created, it is joined with all existing inventory target tables. The **inventory_latest** and the **inventory_latest** views are used with **id** as join column, resulting in two views for each combination of inventory and corresponding alarms, events, measurements target table. 
+
+The views are organized as follows:
 
 - A folder **join** in your data space contains all join views.
 - Within that folder each inventory target table has a corresponding subfolder. The name of the inventory target table defines the name of the subfolder.
